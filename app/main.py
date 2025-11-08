@@ -6,7 +6,7 @@ from typing import Optional
 
 from fastapi import FastAPI, HTTPException, status
 from fastapi.responses import JSONResponse
-
+from .intensity import router as intensity_router
 from .models import (
     CancelRunResponse,
     HealthResponse,
@@ -49,7 +49,8 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan
 )
-
+# Include carbon intensity router
+app.include_router(intensity_router)
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request, exc):
